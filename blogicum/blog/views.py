@@ -51,15 +51,16 @@ def index(request):
 
 
 def post_detail(request, id):
-    template_name = 'blog/detail.html'
-    context = {'post': posts[id]}
-    return render(request, template_name, context)
+    if id in range(len(posts)):
+        template_name = 'blog/detail.html'
+        context = {'post': posts[id]}
+        return render(request, template_name, context)
+    else:
+        template_name = 'blog/nonexistentid.html'
+        return render(request, template_name)
 
 
 def category_posts(request, category_slug):
     template_name = 'blog/category.html'
     context = {'category': category_slug}
     return render(request, template_name, context)
-
-
-# Create your views here.
